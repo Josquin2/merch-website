@@ -1,16 +1,8 @@
 <template>
   <div class="container">
     <button class="main-button">МЕРЧ</button>
-    <div style="display: inline-table">
-      <input class="search" type="text" placeholder="Поиск..." />
-      <button class="search-button">
-        <img style="width: 2vw; opacity: 50%" src="/public/search.png" alt="" />
-      </button>
-    </div>
-
     <div class="images">
       <img class="right-imgs" src="/public/heart.png" alt="heart" />
-
       <img class="right-imgs" src="/public/cart.png" alt="" />
       <img class="right-imgs" src="/public/profile.png" alt="" />
     </div>
