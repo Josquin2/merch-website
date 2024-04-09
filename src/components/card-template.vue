@@ -2,7 +2,7 @@
 defineProps({
   image: String,
   name: String,
-  cost: String
+  cost: Number
 })
 </script>
 

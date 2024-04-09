@@ -1,10 +1,18 @@
 <template>
   <div class="container">
-    <button class="main-button">МЕРЧ</button>
+    <router-link to="/"><button class="main-button">МЕРЧ</button></router-link>
     <div class="images">
-      <img class="right-imgs" src="/public/heart.png" alt="heart" />
-      <img class="right-imgs" src="/public/cart.png" alt="" />
-      <img class="right-imgs" src="/public/profile.png" alt="" />
+      <router-link to="/favorites"
+        ><img class="right-imgs" src="/public/heart.png" alt="heart"
+      /></router-link>
+
+      <router-link to="/cart">
+        <img class="right-imgs" src="/public/cart.png" alt="" />
+      </router-link>
+
+      <router-link to="/profile"
+        ><img class="right-imgs" src="/public/profile.png" alt=""
+      /></router-link>
     </div>
   </div>
 </template>
