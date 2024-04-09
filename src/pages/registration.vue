@@ -31,7 +31,9 @@ export default {
     return {
       login: { required },
       password: { required },
-      confirmPassword: { required, sameAs: sameAs('internalFormData.password') }
+      // TODO: not working
+      confirmPassword: sameAs(this.password)
+      //
     }
   }
 }

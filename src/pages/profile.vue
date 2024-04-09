@@ -1,6 +1,7 @@
 <script>
 import { useVuelidate } from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
+import axios from 'axios'
 export default {
   setup() {
     return { v$: useVuelidate() }
@@ -19,10 +20,19 @@ export default {
         this.success = 'Проверьте ошибки!'
         return
       } else {
-        this.success = 'Новый клиент успешно создан!'
-        setTimeout(() => {
-          this.success = ''
-        }, 2000)
+        const { data } = await axios.get('https://9b239a59d1f6538d.mokky.dev/logs')
+        for (let item of data) {
+          if (item.login == this.login && item.password == this.password.toString()) {
+            this.success = 'Да'
+            console.log('yea')
+
+            // TODO: make current profile
+            break
+          } else if (item.login != this.login || item.password != this.password) {
+            this.success = 'Неверный логин или пароль!'
+            setTimeout(() => (this.success = ''), 1200)
+          }
+        }
       }
     }
   },
