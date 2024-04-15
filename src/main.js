@@ -9,6 +9,7 @@ import Favorites from '@/pages/favorites.vue'
 import Profile from '@/pages/profile.vue'
 import Cart from '@/pages/cart.vue'
 import Registration from '@/pages/registration.vue'
+import Item from '@/pages/item.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -17,7 +18,8 @@ const router = createRouter({
     { path: '/favorites', component: Favorites },
     { path: '/profile', component: Profile },
     { path: '/cart', component: Cart },
-    { path: '/profile/registration', component: Registration }
+    { path: '/profile/registration', component: Registration },
+    { name: 'Item', path: '/item/:item()', component: Item, props: true }
   ]
 })
 

@@ -32,7 +32,7 @@ export default {
       login: { required },
       password: { required },
       // TODO: not working
-      confirmPassword: sameAs(this.password)
+      confirmPassword: { required }
       //
     }
   }
@@ -67,6 +67,8 @@ export default {
       />
       <p v-if="v$.login.$error || v$.password.$error || v$.confirmPassword.$error">
         Проверьте поля!
+        {{ v$.confirmPassword.$error }}
+        {{ v$.login.$error }}
       </p>
 
       <button class="sign-in" @click="send">Войти</button>

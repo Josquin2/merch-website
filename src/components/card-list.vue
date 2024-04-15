@@ -10,6 +10,7 @@ defineProps({
     <div class="card-list">
       <Card
         v-for="item in items"
+        :item="item"
         :key="item.id"
         :image="item.image"
         :name="item.name"

@@ -2,12 +2,13 @@
 defineProps({
   image: String,
   name: String,
-  cost: Number
+  cost: Number,
+  item: Object
 })
 </script>
 
 <template>
-  <div class="card">
+  <div class="card" @click="$router.push({ name: 'Item', params: { item: name } })">
     <img class="image" :src="image" alt="" />
     <div class="underimg">
       <p class="name">{{ name }}</p>

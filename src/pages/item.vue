@@ -1,11 +1,47 @@
+<script>
+export default {
+  props: {
+    item: String
+  },
+  data() {
+    return {
+      info: ''
+    }
+  },
+  methods: {
+    async onCartClick() {
+      if (sessionStorage.getItem == null) {
+        console.log('zaregestityisya')
+      } else {
+        const username = sessionStorage.getItem('username')
+        const url = 'https://9b239a59d1f6538d.mokky.dev/usercard'
+        fetch(`${url}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, pass: this.info })
+        })
+      }
+    }
+  },
+  async mounted() {
+    const url = 'https://9b239a59d1f6538d.mokky.dev/cards?name='
+    const resp = await fetch(`${url}${this.item}`)
+    const data = await resp.json()
+    this.info = data[0]
+  }
+}
+</script>
+
 <template>
   <div class="container">
     <div class="item">
-      <img class="first-image" src="" alt="" />
+      <img class="first-image" :src="info.image" alt="" />
       <div>
         <div class="description">
-          <p class="name">t-shirt</p>
-          <b style="font-family: Arial, Helvetica, sans-serif">2000 P</b>
+          <p class="name">{{ info.name }}</p>
+          <b style="font-family: Arial, Helvetica, sans-serif">{{ info.cost }} Р</b>
           <p class="name" style="margin-top: 1vw; font-size: 20px; opacity: 100%">Размер:</p>
         </div>
         <ul class="">
@@ -15,7 +51,7 @@
           <li>XL</li>
         </ul>
         <div style="display: flex; margin-top: 1vw">
-          <button class="intocart">В корзину</button>
+          <button class="intocart" @click="onCartClick">В корзину</button>
           <button class="heart"><img class="heart-img" src="/public/heart.png" alt="" /></button>
         </div>
 
