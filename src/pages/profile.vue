@@ -152,4 +152,12 @@ export default {
   background-color: black;
   color: white;
 }
+@media only screen and (max-width: 600px) {
+  .login input {
+    width: 60vw;
+  }
+  .sign-in {
+    width: 50vw;
+  }
+}
 </style>

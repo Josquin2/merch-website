@@ -76,4 +76,9 @@
   width: 2.5vw;
   border-radius: 10px;
 }
+@media only screen and (max-width: 600px) {
+  .container {
+    height: 10vh;
+  }
+}
 </style>

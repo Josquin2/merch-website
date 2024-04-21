@@ -46,4 +46,14 @@ defineProps({
 .name {
   font-family: Arial, Helvetica, sans-serif;
 }
+@media only screen and (max-width: 600px) {
+  .card {
+    width: 40vw;
+    height: 30vh;
+  }
+  .image {
+    width: 40vw;
+    height: 40vw;
+  }
+}
 </style>

@@ -24,17 +24,23 @@ defineProps({
 .container {
   margin: auto;
   width: 98vw;
-  height: 110vw;
+  height: max-content;
   background-color: white;
   display: flex;
 }
 .card-list {
   background-color: white;
-  height: 100vw;
+  height: max-content;
   width: 98vw;
 
   padding: 40px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+@media only screen and (max-width: 600px) {
+  .card-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 0;
+  }
 }
 </style>

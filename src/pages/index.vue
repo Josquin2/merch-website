@@ -43,20 +43,23 @@ watch(filters, fetchItems)
 
 <template>
   <div class="container">
-    <p class="sort-by">Сортировать:</p>
+    <div style="display: flex">
+      <p class="sort-by">Сортировать:</p>
 
-    <select @change="onChangeSelect" class="select-search">
-      <option value="name">По названию</option>
-      <option value="cost">По цене (дешевые)</option>
-      <option value="-cost">По цене (дорогие)</option>
-    </select>
-    <input
-      @change="onChangeSearchInput"
-      class="select-search"
-      style="margin-left: 55vw; padding-left: 0.5vw"
-      type="text"
-      placeholder="Поиск..."
-    />
+      <select @change="onChangeSelect" class="select-search">
+        <option value="name">По названию</option>
+        <option value="cost">По цене (дешевые)</option>
+        <option value="-cost">По цене (дорогие)</option>
+      </select>
+    </div>
+    <div>
+      <input
+        @change="onChangeSearchInput"
+        class="select-search input-search"
+        type="text"
+        placeholder="Поиск..."
+      />
+    </div>
   </div>
   <Cards :items="items" />
   <!-- <Item /> -->
@@ -70,6 +73,7 @@ watch(filters, fetchItems)
   height: 3vw;
   background-color: white;
   display: flex;
+  justify-content: space-between;
 }
 .sort-by {
   font-family: Arial, Helvetica, sans-serif;
@@ -80,9 +84,28 @@ watch(filters, fetchItems)
   align-self: center;
   height: 2vw;
   font-family: Arial, Helvetica, sans-serif;
-  border-radius: 5px;
+  border-radius: 1vh;
   border: 1px solid rgb(210, 210, 210);
   width: 15vw;
   margin-left: 1vw;
+}
+.input-search {
+  margin-top: 1vh;
+  padding-left: 0.5vw;
+}
+@media only screen and (max-width: 600px) {
+  .container {
+    height: max-content;
+  }
+  .select-search {
+    height: max-content;
+    width: 45vw;
+    height: 5vh;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+  }
+  .sort-by {
+    display: none;
+  }
 }
 </style>
