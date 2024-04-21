@@ -23,7 +23,9 @@ export default {
         const { data } = await axios.get('https://9b239a59d1f6538d.mokky.dev/logs')
         for (let item of data) {
           if (item.login == this.login && item.password == this.password.toString()) {
+            sessionStorage.setItem('username', this.login)
             this.success = 'Да'
+            this.$forceUpdate()
             console.log('yea')
 
             // TODO: make current profile
@@ -34,6 +36,17 @@ export default {
           }
         }
       }
+    },
+    checkIfLogined() {
+      if (sessionStorage.getItem('username') == null) {
+        return false
+      } else {
+        return true
+      }
+    },
+    Quit() {
+      sessionStorage.clear()
+      this.$forceUpdate()
     }
   },
   validations() {
@@ -47,7 +60,7 @@ export default {
 
 <template>
   <div class="container">
-    <div class="login">
+    <div v-if="checkIfLogined() == false" class="login">
       <h1>Личный кабинет</h1>
       <input
         type="text"
@@ -71,6 +84,9 @@ export default {
         ><button class="sign-in registration">Регистрация</button></router-link
       >
       <p>{{ success }}</p>
+    </div>
+    <div v-else>
+      <button @click="Quit">Logout</button>
     </div>
   </div>
 </template>

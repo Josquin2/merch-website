@@ -5,14 +5,22 @@ export default {
   },
   data() {
     return {
-      info: ''
+      info: '',
+      error: '',
+      size: ''
     }
   },
   methods: {
+    chooseSize(e) {
+      console.log(e.target.value)
+      this.size = e.target.value
+    },
     async onCartClick() {
-      if (sessionStorage.getItem == null) {
+      if (sessionStorage.getItem('username') == null) {
         console.log('zaregestityisya')
+        this.error = 'Необходимо войти в аккаунт!'
       } else {
+        this.error = ''
         const username = sessionStorage.getItem('username')
         const url = 'https://9b239a59d1f6538d.mokky.dev/usercard'
         fetch(`${url}`, {
@@ -44,16 +52,45 @@ export default {
           <b style="font-family: Arial, Helvetica, sans-serif">{{ info.cost }} Р</b>
           <p class="name" style="margin-top: 1vw; font-size: 20px; opacity: 100%">Размер:</p>
         </div>
-        <ul class="">
-          <li>S</li>
-          <li>M</li>
-          <li>L</li>
-          <li>XL</li>
-        </ul>
+        <div class="size-buttons">
+          <button
+            class="buttons-not-clicked"
+            value="S"
+            @click="chooseSize"
+            :class="{ 'button-clicked': size == 'S' }"
+          >
+            S
+          </button>
+          <button
+            class="buttons-not-clicked"
+            value="M"
+            @click="chooseSize"
+            :class="{ 'button-clicked': size == 'M' }"
+          >
+            M
+          </button>
+          <button
+            class="buttons-not-clicked"
+            value="L"
+            @click="chooseSize"
+            :class="{ 'button-clicked': size == 'L' }"
+          >
+            L
+          </button>
+          <button
+            class="buttons-not-clicked"
+            value="XL"
+            @click="chooseSize"
+            :class="{ 'button-clicked': size == 'XL' }"
+          >
+            XL
+          </button>
+        </div>
         <div style="display: flex; margin-top: 1vw">
           <button class="intocart" @click="onCartClick">В корзину</button>
           <button class="heart"><img class="heart-img" src="/public/heart.png" alt="" /></button>
         </div>
+        <p class="item-description error">{{ error }}</p>
 
         <p class="item-description">description</p>
       </div>
@@ -133,5 +170,24 @@ li {
   font-family: Arial, Helvetica, sans-serif;
   margin-left: 6vw;
   margin-top: 1vw;
+}
+.error {
+  color: red;
+}
+.size-buttons {
+  margin-left: 6vw;
+}
+.buttons-not-clicked {
+  background-color: whitesmoke;
+  border: 0;
+  border-radius: 1vh;
+  width: 3vw;
+  height: 5vh;
+  margin-right: 1vw;
+  cursor: pointer;
+}
+.button-clicked {
+  background-color: black;
+  color: white;
 }
 </style>
