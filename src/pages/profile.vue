@@ -27,7 +27,7 @@ export default {
             this.success = 'Да'
             this.$forceUpdate()
             console.log('yea')
-
+            this.$router.push('/')
             // TODO: make current profile
             break
           } else if (item.login != this.login || item.password != this.password) {
@@ -46,7 +46,7 @@ export default {
     },
     Quit() {
       sessionStorage.clear()
-      this.$forceUpdate()
+      this.$router.push({ name: 'Profile', params: { user: 'login' } })
     }
   },
   validations() {
@@ -86,7 +86,9 @@ export default {
       <p>{{ success }}</p>
     </div>
     <div v-else>
-      <button @click="Quit">Logout</button>
+      <div class="loggined-profile">
+        <button @click="Quit">Logout</button>
+      </div>
     </div>
   </div>
 </template>
@@ -152,6 +154,13 @@ export default {
   background-color: black;
   color: white;
 }
+.loggined-profile {
+  align-self: flex-start;
+  width: 50vw;
+  height: 30vh;
+  background-color: aliceblue;
+}
+
 @media only screen and (max-width: 600px) {
   .login input {
     width: 60vw;

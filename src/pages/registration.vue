@@ -20,10 +20,23 @@ export default {
         this.success = 'Проверьте ошибки!'
         return
       } else {
-        this.success = 'Новый клиент успешно создан!'
-        setTimeout(() => {
-          this.success = ''
-        }, 2000)
+        if (this.password == this.confirmPassword) {
+          this.success = 'Новый клиент успешно создан!'
+          setTimeout(() => {
+            this.success = ''
+          }, 2000)
+          fetch('https://9b239a59d1f6538d.mokky.dev/logs', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              login: this.login,
+              password: this.password
+            })
+          })
+          // TODO: Go to main page
+        } else {
+          this.success = 'Пароли не совпадают!'
+        }
       }
     }
   },
@@ -42,7 +55,7 @@ export default {
 <template>
   <div class="container">
     <div class="login">
-      <h1>Личный кабинет</h1>
+      <h1>Новый аккаунт</h1>
       <input
         type="text"
         placeholder="Имя пользователя"
@@ -67,13 +80,11 @@ export default {
       />
       <p v-if="v$.login.$error || v$.password.$error || v$.confirmPassword.$error">
         Проверьте поля!
-        {{ v$.confirmPassword.$error }}
-        {{ v$.login.$error }}
       </p>
 
-      <button class="sign-in" @click="send">Войти</button>
-      <router-link to="/profile/registration"
-        ><button class="sign-in registration">Регистрация</button></router-link
+      <button class="sign-in" @click="send">Зарегестрироваться</button>
+      <router-link to="/profile"
+        ><button class="sign-in registration">Есть аккаунт?</button></router-link
       >
       <p>{{ success }}</p>
     </div>
@@ -120,7 +131,7 @@ export default {
 }
 .sign-in {
   margin-top: 6vh;
-  width: 10vw;
+  width: 16vw;
   height: 6vh;
   background-color: rgb(31, 31, 31);
   color: white;
@@ -131,7 +142,7 @@ export default {
 }
 .registration {
   margin-top: 2vh;
-  width: 16vw;
+  width: 12vw;
   color: black;
   background-color: white;
   border: solid black 1px;

@@ -62,11 +62,9 @@ watch(filters, fetchItems)
     </div>
   </div>
   <Cards :items="items" />
-  <!-- <Item /> -->
-  <Footer />
 </template>
 
-<style>
+<style scoped>
 .container {
   margin: auto;
   width: 98vw;

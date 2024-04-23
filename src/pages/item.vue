@@ -5,6 +5,7 @@ export default {
   },
   data() {
     return {
+      user: sessionStorage.getItem('username'),
       info: '',
       error: '',
       size: ''
@@ -13,12 +14,25 @@ export default {
   methods: {
     chooseSize(e) {
       console.log(e.target.value)
-      this.size = e.target.value
+      this.info.size = e.target.value
+    },
+    isFavorite() {
+      if (this.user != null) {
+        if (this.info.favorite == true) {
+          this.info.favorite = false
+        } else {
+          this.info.favorite = true
+        }
+      } else {
+        this.error = 'Войдите в аккаунт!'
+      }
     },
     async onCartClick() {
       if (sessionStorage.getItem('username') == null) {
         console.log('zaregestityisya')
         this.error = 'Необходимо войти в аккаунт!'
+      } else if (this.info.size == '') {
+        this.error = 'Выберите размер!'
       } else {
         this.error = ''
         const username = sessionStorage.getItem('username')
@@ -38,6 +52,8 @@ export default {
     const resp = await fetch(`${url}${this.item}`)
     const data = await resp.json()
     this.info = data[0]
+    this.info.favorite = false
+    this.info.size = ''
   }
 }
 </script>
@@ -57,7 +73,7 @@ export default {
             class="buttons-not-clicked"
             value="S"
             @click="chooseSize"
-            :class="{ 'button-clicked': size == 'S' }"
+            :class="{ 'button-clicked': info.size == 'S' }"
           >
             S
           </button>
@@ -65,7 +81,7 @@ export default {
             class="buttons-not-clicked"
             value="M"
             @click="chooseSize"
-            :class="{ 'button-clicked': size == 'M' }"
+            :class="{ 'button-clicked': info.size == 'M' }"
           >
             M
           </button>
@@ -73,7 +89,7 @@ export default {
             class="buttons-not-clicked"
             value="L"
             @click="chooseSize"
-            :class="{ 'button-clicked': size == 'L' }"
+            :class="{ 'button-clicked': info.size == 'L' }"
           >
             L
           </button>
@@ -81,14 +97,25 @@ export default {
             class="buttons-not-clicked"
             value="XL"
             @click="chooseSize"
-            :class="{ 'button-clicked': size == 'XL' }"
+            :class="{ 'button-clicked': info.size == 'XL' }"
           >
             XL
           </button>
         </div>
         <div style="display: flex; margin-top: 1vw">
           <button class="intocart" @click="onCartClick">В корзину</button>
-          <button class="heart"><img class="heart-img" src="/public/heart.png" alt="" /></button>
+          <button
+            class="heart"
+            :class="{ 'heart-clicked': info.favorite == true }"
+            @click="isFavorite"
+          >
+            <img
+              class="heart-img"
+              src="/public/heart.png"
+              :src="{ '/public/heart-clicked.png': info.favorite == true }"
+              alt=""
+            />
+          </button>
         </div>
         <p class="item-description error">{{ error }}</p>
 
@@ -149,6 +176,10 @@ export default {
   opacity: 50%;
   transition: 0.4s;
   margin-left: 1vw;
+}
+.heart-clicked {
+  border: 1px solid rgb(255, 210, 217);
+  background-color: rgb(255, 210, 217);
 }
 .heart-img {
   width: 2vw;

@@ -1,3 +1,23 @@
+<script>
+export default {
+  data() {
+    return {}
+  },
+  methods: {
+    onProfileClick() {
+      if (sessionStorage.getItem('username') == null) {
+        this.$router.push({ name: 'Profile' })
+      } else {
+        this.$router.push({
+          name: 'CurrentProfile',
+          params: { user: sessionStorage.getItem('username') }
+        })
+      }
+    }
+  }
+}
+</script>
+
 <template>
   <div class="container">
     <router-link to="/"><button class="main-button">МЕРЧ</button></router-link>
@@ -10,9 +30,7 @@
         <img class="right-imgs" src="/public/cart.png" alt="" />
       </router-link>
 
-      <router-link to="/profile"
-        ><img class="right-imgs" src="/public/profile.png" alt=""
-      /></router-link>
+      <img @click="onProfileClick" class="right-imgs" src="/public/profile.png" alt="" />
     </div>
   </div>
 </template>
