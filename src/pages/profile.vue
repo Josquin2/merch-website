@@ -77,18 +77,13 @@ export default {
         @blur="v$.password.$touch"
         :class="{ error: v$.password.$error }"
       />
-      <p v-if="v$.login.$error || v$.password.$error">Неверный логин или пароль!</p>
+      <p v-if="v$.login.$error || v$.password.$error">Поля должны быть заполнены!</p>
+      <p>{{ success }}</p>
 
       <button class="sign-in" @click="send">Войти</button>
       <router-link to="/profile/registration"
         ><button class="sign-in registration">Регистрация</button></router-link
       >
-      <p>{{ success }}</p>
-    </div>
-    <div v-else>
-      <div class="loggined-profile">
-        <button @click="Quit">Logout</button>
-      </div>
     </div>
   </div>
 </template>
@@ -153,12 +148,6 @@ export default {
 .registration:hover {
   background-color: black;
   color: white;
-}
-.loggined-profile {
-  align-self: flex-start;
-  width: 50vw;
-  height: 30vh;
-  background-color: aliceblue;
 }
 
 @media only screen and (max-width: 600px) {

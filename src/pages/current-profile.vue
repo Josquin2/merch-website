@@ -20,13 +20,14 @@ export default {
 <template>
   <div class="container">
     <div class="about">
-      <div style="display: flex">
-        <p>Username:</p>
-        <b>{{ user }}</b>
+      <div style="text-align: center">
+        <p>Hello,</p>
+        <b>{{ user }}!</b>
       </div>
 
-      <div class="quit-button">
-        <button @click="onQuitButton">Quit</button>
+      <div class="buttons">
+        <button class="single-button shopping">Go shopping!</button>
+        <button class="single-button" @click="onQuitButton">Quit</button>
       </div>
     </div>
   </div>
@@ -40,19 +41,41 @@ export default {
   background-color: white;
   display: flex;
   padding: 5vh;
+  justify-content: center;
+  padding-top: 30vh;
 }
 .about {
   font-size: 24px;
   font-family: Arial, Helvetica, sans-serif;
 }
-.quit-button button {
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+.single-button {
   width: 10vw;
   height: 5vh;
   font-size: 24px;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: white;
+  background-color: rgb(39, 39, 39);
+  color: white;
   border: 1px solid rgb(39, 39, 39);
   border-radius: 1vh;
   cursor: pointer;
+  align-self: center;
+  margin-top: 1vh;
+}
+.shopping {
+  width: 20vw;
+  background-color: white;
+  color: black;
+}
+@media only screen and (max-width: 600px) {
+  .single-button {
+    width: 30vw;
+  }
+  .shopping {
+    width: 50vw;
+  }
 }
 </style>

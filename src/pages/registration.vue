@@ -1,6 +1,7 @@
 <script>
 import { useVuelidate } from '@vuelidate/core'
 import { required, sameAs } from '@vuelidate/validators'
+import Profile from './profile.vue'
 export default {
   setup() {
     return { v$: useVuelidate() }
@@ -34,6 +35,8 @@ export default {
             })
           })
           // TODO: Go to main page
+          sessionStorage.setItem('username', this.login)
+          this.$router.push({ name: 'CurrentProfile', params: { user: this.login } })
         } else {
           this.success = 'Пароли не совпадают!'
         }
@@ -151,5 +154,13 @@ export default {
 .registration:hover {
   background-color: black;
   color: white;
+}
+@media only screen and (max-width: 600px) {
+  .login input {
+    width: 60vw;
+  }
+  .sign-in {
+    width: 60vw;
+  }
 }
 </style>

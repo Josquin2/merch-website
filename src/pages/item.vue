@@ -8,30 +8,49 @@ export default {
       user: sessionStorage.getItem('username'),
       info: '',
       error: '',
-      size: ''
+      size: '',
+      favorite: false,
+      favId: 1221
     }
   },
+
   methods: {
     chooseSize(e) {
       console.log(e.target.value)
-      this.info.size = e.target.value
+      this.info.chooseSize = e.target.value
     },
     isFavorite() {
       if (this.user != null) {
-        if (this.info.favorite == true) {
-          this.info.favorite = false
+        if (this.favorite == true) {
+          this.favorite = false
+          const url = 'https://9b239a59d1f6538d.mokky.dev'
+          fetch(`${url}/favorites/${this.favId}`, {
+            method: 'DELETE'
+          })
         } else {
-          this.info.favorite = true
+          this.favorite = true
+          fetch('https://9b239a59d1f6538d.mokky.dev/favorites', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username: this.user,
+              pass: { image: this.info.image, name: this.info.name, cost: this.info.cost },
+              favorite: this.favorite
+            })
+          })
         }
       } else {
         this.error = 'Войдите в аккаунт!'
       }
     },
+
     async onCartClick() {
       if (sessionStorage.getItem('username') == null) {
         console.log('zaregestityisya')
         this.error = 'Необходимо войти в аккаунт!'
-      } else if (this.info.size == '') {
+      } else if (this.info.chooseSize == '' && this.info.size) {
         this.error = 'Выберите размер!'
       } else {
         this.error = ''
@@ -47,13 +66,24 @@ export default {
       }
     }
   },
+
   async mounted() {
     const url = 'https://9b239a59d1f6538d.mokky.dev/cards?name='
     const resp = await fetch(`${url}${this.item}`)
     const data = await resp.json()
     this.info = data[0]
-    this.info.favorite = false
-    this.info.size = ''
+    this.info.chooseSize = ''
+    console.log(this.info)
+
+    const favorite = await fetch('https://9b239a59d1f6538d.mokky.dev/favorites')
+    const favData = await favorite.json()
+
+    for (let item of favData) {
+      if (item.username == this.user && item.pass.name == this.info.name && item.favorite == true) {
+        this.favorite = true
+        this.favId = item.id
+      }
+    }
   }
 }
 </script>
@@ -70,49 +100,23 @@ export default {
         </div>
         <div class="size-buttons">
           <button
+            v-for="button in info.size"
             class="buttons-not-clicked"
-            value="S"
+            :value="button"
             @click="chooseSize"
-            :class="{ 'button-clicked': info.size == 'S' }"
+            :class="{ 'button-clicked': info.chooseSize == button }"
           >
-            S
-          </button>
-          <button
-            class="buttons-not-clicked"
-            value="M"
-            @click="chooseSize"
-            :class="{ 'button-clicked': info.size == 'M' }"
-          >
-            M
-          </button>
-          <button
-            class="buttons-not-clicked"
-            value="L"
-            @click="chooseSize"
-            :class="{ 'button-clicked': info.size == 'L' }"
-          >
-            L
-          </button>
-          <button
-            class="buttons-not-clicked"
-            value="XL"
-            @click="chooseSize"
-            :class="{ 'button-clicked': info.size == 'XL' }"
-          >
-            XL
+            {{ button }}
           </button>
         </div>
+
         <div style="display: flex; margin-top: 1vw">
           <button class="intocart" @click="onCartClick">В корзину</button>
-          <button
-            class="heart"
-            :class="{ 'heart-clicked': info.favorite == true }"
-            @click="isFavorite"
-          >
+          <button class="heart" :class="{ 'heart-clicked': favorite == true }" @click="isFavorite">
             <img
               class="heart-img"
               src="/public/heart.png"
-              :src="{ '/public/heart-clicked.png': info.favorite == true }"
+              :src="{ '/public/heart-clicked.png': favorite == true }"
               alt=""
             />
           </button>
@@ -220,5 +224,36 @@ li {
 .button-clicked {
   background-color: black;
   color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .item {
+    flex-direction: column;
+  }
+  .first-image {
+    width: 80vw;
+    height: 80vw;
+    align-self: center;
+  }
+  .intocart {
+    margin-top: 2vh;
+    width: 48vw;
+    height: 8vh;
+    border-radius: 2vh;
+  }
+  .heart {
+    margin-top: 2vh;
+    width: 8vh;
+    height: 8vh;
+    border-radius: 2vh;
+  }
+  .heart-img {
+    width: 4vh;
+  }
+  .buttons-not-clicked {
+    width: 10vh;
+    height: 6vh;
+    margin-right: 1vh;
+  }
 }
 </style>

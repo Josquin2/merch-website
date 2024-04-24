@@ -20,6 +20,7 @@ defineProps({
 </template>
 <style scoped>
 .card {
+  margin-top: 3vh;
   cursor: pointer;
   width: 22vw;
   height: 24vw;
