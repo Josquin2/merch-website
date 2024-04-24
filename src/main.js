@@ -15,13 +15,13 @@ import CurrentProfile from '@/pages/current-profile.vue'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', component: StartPage },
-    { path: '/favorites', component: Favorites },
-    { name: 'Profile', path: '/profile', component: Profile },
-    { name: 'CurrentProfile', path: '/profile/:user()', component: CurrentProfile },
-    { path: '/cart', component: Cart },
-    { path: '/profile/registration', component: Registration },
-    { name: 'Item', path: '/item/:item()', component: Item, props: true }
+    { path: '/merch-website/', component: StartPage },
+    { path: '/merch-website/favorites', component: Favorites },
+    { name: 'Profile', path: '/merch-website/profile', component: Profile },
+    { name: 'CurrentProfile', path: '/merch-website/profile/:user()', component: CurrentProfile },
+    { path: '/merch-website/cart', component: Cart },
+    { path: '/merch-website/profile/registration', component: Registration },
+    { name: 'Item', path: '/merch-website/item/:item()', component: Item, props: true }
   ]
 })
 

@@ -20,13 +20,13 @@ export default {
 
 <template>
   <div class="container">
-    <router-link to="/"><button class="main-button">МЕРЧ</button></router-link>
+    <router-link to="/merch-website/"><button class="main-button">МЕРЧ</button></router-link>
     <div class="images">
-      <router-link to="/favorites"
+      <router-link to="/merch-website/favorites"
         ><img class="right-imgs" src="/public/heart.png" alt="heart"
       /></router-link>
 
-      <router-link to="/cart">
+      <router-link to="/merch-website/cart">
         <img class="right-imgs" src="/public/cart.png" alt="" />
       </router-link>
 

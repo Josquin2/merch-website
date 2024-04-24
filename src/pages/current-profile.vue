@@ -12,6 +12,9 @@ export default {
     onQuitButton() {
       sessionStorage.clear()
       this.$router.push({ name: 'Profile' })
+    },
+    goShoppingButton() {
+      this.$router.push('/merch-website/')
     }
   }
 }
@@ -26,7 +29,7 @@ export default {
       </div>
 
       <div class="buttons">
-        <button class="single-button shopping">Go shopping!</button>
+        <button class="single-button shopping" @click="goShoppingButton">Go shopping!</button>
         <button class="single-button" @click="onQuitButton">Quit</button>
       </div>
     </div>

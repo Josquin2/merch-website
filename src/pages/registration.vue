@@ -86,7 +86,7 @@ export default {
       </p>
 
       <button class="sign-in" @click="send">Зарегестрироваться</button>
-      <router-link to="/profile"
+      <router-link to="/merch-website/profile"
         ><button class="sign-in registration">Есть аккаунт?</button></router-link
       >
       <p>{{ success }}</p>

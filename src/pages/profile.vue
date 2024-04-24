@@ -27,7 +27,7 @@ export default {
             this.success = 'Да'
             this.$forceUpdate()
             console.log('yea')
-            this.$router.push('/')
+            this.$router.push('/merch-website/')
             // TODO: make current profile
             break
           } else if (item.login != this.login || item.password != this.password) {
@@ -81,7 +81,7 @@ export default {
       <p>{{ success }}</p>
 
       <button class="sign-in" @click="send">Войти</button>
-      <router-link to="/profile/registration"
+      <router-link to="/merch-website/profile/registration"
         ><button class="sign-in registration">Регистрация</button></router-link
       >
     </div>
