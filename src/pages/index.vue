@@ -86,6 +86,7 @@ watch(filters, fetchItems)
   border: 1px solid rgb(210, 210, 210);
   width: 15vw;
   margin-left: 1vw;
+  color: black;
 }
 .input-search {
   margin-top: 1vh;

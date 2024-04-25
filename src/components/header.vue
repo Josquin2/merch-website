@@ -66,6 +66,7 @@ export default {
   border: 0;
   cursor: pointer;
   background-color: white;
+  color: black;
   font-size: 30px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin-left: 20px;

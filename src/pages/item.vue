@@ -10,7 +10,8 @@ export default {
       error: '',
       size: '',
       favorite: false,
-      favId: 1221
+      favId: 1221,
+      success: ' '
     }
   },
 
@@ -50,10 +51,13 @@ export default {
       if (sessionStorage.getItem('username') == null) {
         console.log('zaregestityisya')
         this.error = 'Необходимо войти в аккаунт!'
+        setTimeout(() => (this.error = ''), 1500)
       } else if (this.info.chooseSize == '' && this.info.size) {
         this.error = 'Выберите размер!'
+        setTimeout(() => (this.error = ''), 1500)
       } else {
         this.error = ''
+        this.success = 'Товар добавлен в корзину!'
         const username = sessionStorage.getItem('username')
         const url = 'https://9b239a59d1f6538d.mokky.dev/usercard'
         fetch(`${url}`, {
@@ -63,6 +67,7 @@ export default {
           },
           body: JSON.stringify({ username, pass: this.info })
         })
+        setTimeout(() => (this.success = ''), 1500)
       }
     }
   },
@@ -121,9 +126,10 @@ export default {
             />
           </button>
         </div>
+        <p class="item-description success-msg">{{ success }}</p>
         <p class="item-description error">{{ error }}</p>
 
-        <p class="item-description">description</p>
+        <p class="item-description" style="margin-top: 6vh">description</p>
       </div>
     </div>
   </div>
@@ -208,6 +214,10 @@ li {
 }
 .error {
   color: red;
+  position: absolute;
+}
+.success-msg {
+  position: absolute;
 }
 .size-buttons {
   margin-left: 6vw;
