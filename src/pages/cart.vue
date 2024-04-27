@@ -123,6 +123,7 @@ export default {
   height: max-content;
 }
 .card-template {
+  margin-left: 2.5vw;
   margin-top: 2vh;
   width: 40vw;
   height: 20vh;
@@ -131,6 +132,7 @@ export default {
   border: 1px solid rgb(190, 190, 190);
   justify-items: flex-end;
   flex-wrap: wrap;
+  overflow: auto;
 }
 .rubbish {
   font-size: 24px;

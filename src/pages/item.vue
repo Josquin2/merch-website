@@ -43,7 +43,8 @@ export default {
           })
         }
       } else {
-        this.error = 'Войдите в аккаунт!'
+        this.error = 'Необходимо войти в аккаунт!'
+        setTimeout(() => (this.error = ''), 1500)
       }
     },
 
@@ -129,7 +130,7 @@ export default {
         <p class="item-description success-msg">{{ success }}</p>
         <p class="item-description error">{{ error }}</p>
 
-        <p class="item-description" style="margin-top: 6vh">description</p>
+        <p class="item-description" style="margin-top: 6vh">{{ info.description }}</p>
       </div>
     </div>
   </div>
@@ -223,6 +224,7 @@ li {
   margin-left: 6vw;
 }
 .buttons-not-clicked {
+  color: black;
   background-color: whitesmoke;
   border: 0;
   border-radius: 1vh;
@@ -230,6 +232,7 @@ li {
   height: 5vh;
   margin-right: 1vw;
   cursor: pointer;
+  font-size: 18px;
 }
 .button-clicked {
   background-color: black;

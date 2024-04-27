@@ -74,6 +74,9 @@ export default {
   color: black;
 }
 @media only screen and (max-width: 600px) {
+  .container {
+    width: 50vw;
+  }
   .single-button {
     width: 30vw;
   }
