@@ -20,7 +20,7 @@ defineProps({
 </template>
 <style scoped>
 .card {
-  margin-top: 3vh;
+  margin-top: 15px;
   cursor: pointer;
   width: 22vw;
   height: 24vw;
@@ -50,7 +50,7 @@ defineProps({
 @media only screen and (max-width: 600px) {
   .card {
     width: 40vw;
-    height: 30vh;
+    height: max-content;
   }
   .image {
     width: 40vw;
