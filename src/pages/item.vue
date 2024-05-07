@@ -43,16 +43,15 @@ export default {
           })
         }
       } else {
-        this.error = 'Необходимо войти в аккаунт!'
-        setTimeout(() => (this.error = ''), 1500)
+        // Пользователь не вошел в аккаунт
+        this.$router.push({ name: 'Profile' })
       }
     },
 
     async onCartClick() {
+      // Пользователь не вошел в аккаунт
       if (sessionStorage.getItem('username') == null) {
-        console.log('zaregestityisya')
-        this.error = 'Необходимо войти в аккаунт!'
-        setTimeout(() => (this.error = ''), 1500)
+        this.$router.push({ name: 'Profile' })
       } else if (this.info.chooseSize == '' && this.info.size) {
         this.error = 'Выберите размер!'
         setTimeout(() => (this.error = ''), 1500)
