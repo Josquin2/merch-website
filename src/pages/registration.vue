@@ -1,7 +1,6 @@
 <script>
 import { useVuelidate } from '@vuelidate/core'
-import { required, sameAs } from '@vuelidate/validators'
-import Profile from './profile.vue'
+import { required } from '@vuelidate/validators'
 export default {
   setup() {
     return { v$: useVuelidate() }
@@ -11,7 +10,8 @@ export default {
       success: '',
       login: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      data: []
     }
   },
   methods: {
@@ -22,21 +22,27 @@ export default {
         return
       } else {
         if (this.password == this.confirmPassword) {
-          this.success = 'Новый клиент успешно создан!'
-          setTimeout(() => {
-            this.success = ''
-          }, 2000)
-          fetch('https://9b239a59d1f6538d.mokky.dev/logs', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              login: this.login,
-              password: this.password
-            })
-          })
-          // TODO: Go to main page
-          sessionStorage.setItem('username', this.login)
-          this.$router.push({ name: 'CurrentProfile', params: { user: this.login } })
+          // Совпадение паролей
+          for (let a of this.data) {
+            console.log(a.login)
+            if (a.login == this.login) {
+              // Проверка на уже занятый логин
+              this.success = 'Имя пользователя занято!'
+              setTimeout(() => (this.success = ''), 1500)
+            } else {
+              // Новый пользователь успешно создан
+              fetch('https://9b239a59d1f6538d.mokky.dev/logs', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  login: this.login,
+                  password: this.password
+                })
+              })
+              sessionStorage.setItem('username', this.login)
+              this.$router.push({ name: 'CurrentProfile', params: { user: this.login } })
+            }
+          }
         } else {
           this.success = 'Пароли не совпадают!'
         }
@@ -51,6 +57,11 @@ export default {
       confirmPassword: { required }
       //
     }
+  },
+  async mounted() {
+    const resp = await fetch('https://9b239a59d1f6538d.mokky.dev/logs')
+    const data = await resp.json()
+    this.data = data
   }
 }
 </script>
