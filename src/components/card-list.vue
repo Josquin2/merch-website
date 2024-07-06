@@ -39,7 +39,9 @@ defineProps({
 }
 @media only screen and (max-width: 600px) {
   .card-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 0;
   }
 }
