@@ -1,14 +1,25 @@
 <script setup>
-function onProfileClick() {}
+import router from '@/main'
+function onProfileClick() {
+  router.push({ name: 'Profile' })
+}
 
-function onHeartClick() {}
+function onHeartClick() {
+  router.push({ name: 'favorites' })
+}
 
-function onCartClick() {}
+function onCartClick() {
+  router.push({ name: 'cart' })
+}
+
+function onLogoClick() {
+  router.push({ name: 'main' })
+}
 </script>
 
 <template>
   <header class="main-header">
-    <div class="logo">
+    <div class="logo" @click="onLogoClick">
       <img src="/logo.png" alt="" />
     </div>
     <div class="header-buttons">
