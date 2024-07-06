@@ -43,8 +43,8 @@ watch(filters, fetchItems)
 
 <template>
   <div class="container">
-    <div style="display: flex">
-      <p class="sort-by">Сортировать:</p>
+    <div class="sort-by">
+      <p>Сортировать:</p>
 
       <select @change="onChangeSelect" class="select-search">
         <option value="name">По названию</option>
@@ -61,45 +61,56 @@ watch(filters, fetchItems)
       />
     </div>
   </div>
+  <img
+    src="https://static.insales-cdn.com/files/1/375/20062583/original/zatochka_merch-2.jpg?1649766022"
+    alt=""
+  />
   <Cards :items="items" />
 </template>
 
 <style scoped>
+img {
+  margin-top: 24px;
+  width: 100vw;
+}
 .container {
-  margin: auto;
-  width: 98vw;
+  padding: 0 10vw;
+  margin-top: 24px;
+  width: 100vw;
   height: 3vw;
   background-color: white;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 .sort-by {
-  font-family: Arial, Helvetica, sans-serif;
-  align-self: center;
-  margin-left: 3vw;
+  display: flex;
+  align-items: center;
 }
 .select-search {
   align-self: center;
-  height: 2vw;
+  height: max-content;
+  padding: 4px 0px;
   font-family: Arial, Helvetica, sans-serif;
   border-radius: 1vh;
   border: 1px solid rgb(210, 210, 210);
-  width: 15vw;
+  width: max-content;
   margin-left: 1vw;
   color: black;
   background-color: white;
 }
 .input-search {
-  margin-top: 1vh;
   padding-left: 0.5vw;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 550px) {
   .container {
     height: max-content;
+    display: flex;
+    justify-content: center;
   }
   .select-search {
     height: max-content;
-    width: 45vw;
+    width: 75vw;
     height: 5vh;
     margin-top: 1vh;
     margin-bottom: 1vh;

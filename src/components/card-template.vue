@@ -56,8 +56,38 @@ defineProps({
     }
   }
 }
+@media only screen and (max-width: 1100px) {
+  .card {
+    width: 28.5vw;
+    height: 375px;
 
-@media only screen and (max-width: 500px) {
+    .image {
+      width: 26.5vw;
+      margin-top: 8px;
+    }
+  }
+  .underimg {
+    b {
+      margin-bottom: 6px;
+    }
+  }
+}
+@media only screen and (max-width: 700px) {
+  .card {
+    width: 41vw;
+    height: 345px;
+    .image {
+      width: 39vw;
+      margin-top: 8px;
+
+      img {
+        width: 28vw;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 550px) {
   .card {
     width: 90vw;
     height: 375px;
@@ -68,6 +98,14 @@ defineProps({
 
       img {
         width: 75vw;
+      }
+    }
+
+    .underimg {
+      margin-top: 8px;
+
+      b {
+        margin-bottom: 4px;
       }
     }
   }

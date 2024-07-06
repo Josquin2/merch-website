@@ -6,7 +6,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="container">
+  <div class="container-cards">
     <div class="card-list">
       <Card
         v-for="item in items"
@@ -21,7 +21,7 @@ defineProps({
 </template>
 
 <style scoped>
-.container {
+.container-cards {
   margin: auto;
   width: 98vw;
   height: max-content;
@@ -37,7 +37,17 @@ defineProps({
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1100px) {
+  .card-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media only screen and (max-width: 700px) {
+  .card-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media only screen and (max-width: 550px) {
   .card-list {
     display: flex;
     flex-direction: column;
